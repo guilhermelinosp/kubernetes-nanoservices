@@ -23,7 +23,7 @@ To get started with this project, follow the instructions below.
 1. Clone this repository onto your local machine using the following command:
 
    ```shell
-   git clone https://github.com/guilhermelinosp/.dotinet-microservices-full-course
+   git clone https://github.com/guilhermelinosp/dotnet-microservices-full-course
    ```
 
 2. Navigate into the cloned directory:
