@@ -14,7 +14,6 @@
 
 - .NET 7.0
 - Docker Compose
-- 
 
 ## Getting Started
 
@@ -23,13 +22,13 @@ To get started with this project, follow the instructions below.
 1. Clone this repository onto your local machine using the following command:
 
    ```shell
-   git clone https://github.com/guilhermelinosp/dotnet-microservices-full-course
+   git clone https://github.com/guilhermelinosp/dotnet-microservices-full-course.git
    ```
 
 2. Navigate into the cloned directory:
 
    ```shell
-   cd course-redis-api
+   cd dotnet-microservices-full-course
    ```
 
 3. Start the Docker container using Docker Compose:
