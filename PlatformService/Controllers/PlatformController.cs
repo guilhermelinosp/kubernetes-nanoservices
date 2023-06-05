@@ -4,7 +4,7 @@ using PlatformService.Data;
 
 namespace PlatformService.Controllers
 {
-	[Route("api/public/v1/[controller]")]
+	[Route("api/v1/[controller]")]
 	[ApiController]
 	public class PlatformController : ControllerBase
 	{
