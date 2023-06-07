@@ -49,7 +49,7 @@ namespace PlatformService.Controllers
 			_repository.CreatePlatform(platform);
 			_repository.SaveChanges();
 
-			var platformReadDto = _mapper.Map<Dtos.PlatformReadDto>(platform);
+			var platformReadDto = _mapper.Map<PlatformReadDto>(platform);
 
 			try
 			{
