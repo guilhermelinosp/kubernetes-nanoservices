@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-depl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: platformservice
+  template:
+    metadata:
+      labels:
+        app: platformservice
+    spec:
+      containers:
+        - name: platformservice
+          image: guilhermelinosp/platformservice:latest
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"

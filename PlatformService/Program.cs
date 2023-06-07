@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using PlatformService.AsyncDataService.Http;
 using PlatformService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("InMen"));
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
