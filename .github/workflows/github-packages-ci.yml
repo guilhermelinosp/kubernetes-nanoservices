@@ -19,7 +19,7 @@ jobs:
 
       - name: Set service_lowercase
         id: set_service_lowercase
-        run: echo "::set-output name=service_lowercase::$(echo ${{ github.event_name }} | tr '[:upper:]' '[:lower:]')"
+        run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Docker Login to GitHub Packages
         uses: docker/login-action@v2.1.0
