@@ -27,5 +27,5 @@ jobs:
 
       - name: Build and Push Dockerfile for ${{ matrix.service }} Service API to Docker Hub
         run: |
-          docker build -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
+          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
           docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
