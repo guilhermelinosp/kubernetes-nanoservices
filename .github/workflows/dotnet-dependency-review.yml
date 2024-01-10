@@ -1,4 +1,4 @@
-name: dotnet-dependency
+name: .NET Dependency Review CI
 on:
   pull_request:
     branches: ["main"]
