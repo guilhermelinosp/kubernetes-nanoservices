@@ -22,11 +22,7 @@ jobs:
         run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Docker Login to GitHub Packages
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}  # Substitua por um novo token se necessário
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
 
       - name: Build and push Docker images to GitHub Packages
@@ -36,4 +32,4 @@ jobs:
           file: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
+            ghcr.io/${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
