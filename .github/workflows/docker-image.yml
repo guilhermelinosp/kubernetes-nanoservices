@@ -33,7 +33,7 @@ jobs:
           DOCKER_IMAGE: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
         run: |
           echo "Logging into Docker registry..."
-          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin exit 1
+          echo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           echo "Docker login successful."
 
           echo "Creating and inspecting Docker Buildx builder..."
