@@ -30,17 +30,20 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_IMAGE: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
+          DOCKER_REPOSITORY: guilhermelinosp  # Substitua pelo seu nome de usuário ou organização no Docker Hub
+          DOCKER_SERVICE: ${{ matrix.service }}
+          DOCKER_IMAGE_TAG: dev
         run: |
           echo "Logging into Docker registry..."
-          echo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REPOSITORY || exit 1
           echo "Docker login successful."
 
           echo "Creating and inspecting Docker Buildx builder..."
           docker buildx create --use || exit 1
           docker buildx inspect --bootstrap || exit 1
 
-          echo "Building and pushing Docker image for ${{ matrix.service }} Service API..."
-          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE . --push || exit 1
-          docker push $DOCKER_IMAGE || exit 1
+          DOCKER_IMAGE="${DOCKER_REPOSITORY}/${DOCKER_SERVICE}-api:${DOCKER_IMAGE_TAG}"
+
+          echo "Building and pushing Docker image for $DOCKER_SERVICE Service API..."
+          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE -f ./Source/${DOCKER_SERVICE}/${DOCKER_SERVICE}.Service.API/Dockerfile . --push || exit 1
           echo "Docker image successfully built and pushed."
