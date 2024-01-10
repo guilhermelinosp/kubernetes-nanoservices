@@ -29,11 +29,3 @@ jobs:
         run: |
           docker build -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
           docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
-
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Build and Push Dockerfile for ${{ matrix.service }} Service API to Github Packages
-        run: |
-          docker build -t ghcr.io/guilhermelinosp/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
-          docker push ghcr.io/guilhermelinosp/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
