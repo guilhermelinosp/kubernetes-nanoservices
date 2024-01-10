@@ -15,8 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set Custom DNS
+        run: echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
+
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1.7.0
+        uses: docker/setup-buildx-action@v2
 
       - name: Set service_lowercase
         id: set_service_lowercase
