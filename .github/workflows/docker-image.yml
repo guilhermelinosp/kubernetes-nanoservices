@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           context: .
-          file: ${{DOCKERFILE_PATH}}
+          file: ${{DOCKERFILE_PATH}} .
           push: true
           tags: |
             ${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
