@@ -14,10 +14,14 @@ jobs:
         service: [Command, Platform]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
+      - name: Set Service Lowercase
         id: set_service_lowercase
-        run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
+        run: |
+          service_lowercase=$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')
+          echo "::set-output name=service_lowercase::$service_lowercase"
 
       - name: Build and Push Docker Image
         uses: GlueOps/github-actions-build-push-containers@v0.3.5
@@ -25,10 +29,10 @@ jobs:
           dockerfile: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
           registry: ghcr.io
           registry-username: ${{ github.actor }}
-          image_name: ${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api
+          image_name: ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api
           context: .
+          target_directory: .
           tags: dev
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
           dockerhub_username: ${{ secrets.DOCKER_USERNAME }}
           dockerhub_password: ${{ secrets.DOCKER_PASSWORD }}
