@@ -29,10 +29,10 @@ jobs:
           dockerfile: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
           registry: ghcr.io
           registry-username: ${{ github.actor }}
-          image_name: ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api
+          image_name: ${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api
           context: .
           target_directory: .
-          tags: dev
+          tags: latest
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dockerhub_username: ${{ secrets.DOCKER_USERNAME }}
           dockerhub_password: ${{ secrets.DOCKER_PASSWORD }}
