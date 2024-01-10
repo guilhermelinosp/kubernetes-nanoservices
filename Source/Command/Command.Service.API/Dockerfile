@@ -8,9 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Source/Command/Command.Service.API/Command.Service.API.csproj", "Source/Command/Command.Service.API/"]
+COPY ["Source/Command/Command.Service.Infrastructure/Command.Service.Infrastructure.csproj", "Source/Command/Command.Service.Infrastructure/"]
 COPY ["Source/Command/Command.Service.Application/Command.Service.Application.csproj", "Source/Command/Command.Service.Application/"]
 COPY ["Source/Command/Command.Service.Domain/Command.Service.Domain.csproj", "Source/Command/Command.Service.Domain/"]
-COPY ["Source/Command/Command.Service.Infrastructure/Command.Service.Infrastructure.csproj", "Source/Command/Command.Service.Infrastructure/"]
 RUN dotnet restore "Source/Command/Command.Service.API/Command.Service.API.csproj"
 COPY . .
 WORKDIR "/src/Source/Command/Command.Service.API"

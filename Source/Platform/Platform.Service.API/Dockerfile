@@ -8,9 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Source/Platform/Platform.Service.API/Platform.Service.API.csproj", "Source/Platform/Platform.Service.API/"]
+COPY ["Source/Platform/Platform.Service.Infrastructure/Platform.Service.Infrastructure.csproj", "Source/Platform/Platform.Service.Infrastructure/"]
 COPY ["Source/Platform/Platform.Service.Application/Platform.Service.Application.csproj", "Source/Platform/Platform.Service.Application/"]
 COPY ["Source/Platform/Platform.Service.Domain/Platform.Service.Domain.csproj", "Source/Platform/Platform.Service.Domain/"]
-COPY ["Source/Platform/Platform.Service.Infrastructure/Platform.Service.Infrastructure.csproj", "Source/Platform/Platform.Service.Infrastructure/"]
 RUN dotnet restore "Source/Platform/Platform.Service.API/Platform.Service.API.csproj"
 COPY . .
 WORKDIR "/src/Source/Platform/Platform.Service.API"
