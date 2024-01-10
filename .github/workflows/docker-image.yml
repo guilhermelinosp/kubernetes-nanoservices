@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build the Docker image for Command Service API
+        run: docker build -t command.service.api:$(date +%s) ./Source/Command/Command.Service.API
+
+      - name: Build the Docker image for Platform Service API
+        run: docker build -t platform.service.api:$(date +%s) ./Source/Platform/Platform.Service.API
