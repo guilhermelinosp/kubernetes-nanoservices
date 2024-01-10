@@ -1,68 +1,38 @@
+name: Docker Image CI
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  push:
+  build_and_push:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         service: [Command, Platform]
 
+    env:
+      DOCKER_IMAGE_TAG: dev
+      DOCKERFILE_PATH: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Set Custom DNS
-        run: echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
-
-      - name: Retry Docker Login
-        run: |
-          retries=5
-          until [ $retries -eq 0 ]; do
-            echo "Logging into Docker registry... (Retries left: $retries)"
-            if echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REPOSITORY; then
-              break
-            fi
-            ((retries--))
-            sleep 5
-          done
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_REPOSITORY: guilhermelinosp
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin guilhermelinosp
 
       - name: Set service_lowercase
         id: set_service_lowercase
+        run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
+
+      - name: Build Dockerfile the ${{ matrix.service }} Service API
         run: |
-          echo "Setting lowercase service name..."
-          service_lowercase=$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')
-          echo "::set-output name=service_lowercase::${service_lowercase}"
-          echo "Lowercase service name set to: ${service_lowercase}"
+          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG} -f ${{ env.DOCKERFILE_PATH }} .
 
-      - name: Build and Push Dockerfile for ${{ matrix.service }} Service API
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_REPOSITORY: guilhermelinosp  # Substitua pelo seu nome de usuário ou organização no Docker Hub
-          DOCKER_SERVICE: ${{ matrix.service }}
-          DOCKER_IMAGE_TAG: dev
+      - name: Push Dockerfile the ${{ matrix.service }} Service API
         run: |
-          echo "Logging into Docker registry..."
-          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REPOSITORY || exit 1
-          echo "Docker login successful."
-
-          echo "Creating and inspecting Docker Buildx builder..."
-          docker buildx create --use || exit 1
-          docker buildx inspect --bootstrap || exit 1
-
-          DOCKER_IMAGE="${DOCKER_REPOSITORY}/${DOCKER_SERVICE}-api:${DOCKER_IMAGE_TAG}"
-
-          echo "Building and pushing Docker image for $DOCKER_SERVICE Service API..."
-          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE -f ./Source/${DOCKER_SERVICE}/${DOCKER_SERVICE}.Service.API/Dockerfile . --push || exit 1
-          echo "Docker image successfully built and pushed."
+          docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
