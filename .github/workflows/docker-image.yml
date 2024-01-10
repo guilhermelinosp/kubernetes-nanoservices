@@ -14,27 +14,25 @@ jobs:
       matrix:
         service: [Command, Platform]
 
+    env:
+      DOCKER_IMAGE_TAG: dev
+      DOCKERFILE_PATH: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Docker Login
-        run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          mkdir -p ~/.docker
-          cat > ~/.docker/config.json <<EOF
-          {
-            "credHelpers": {
-              "docker.io": "store"
-            }
-          }
-          EOF
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: Set service_lowercase
         id: set_service_lowercase
         run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
 
-      - name: Build and Push Dockerfile for ${{ matrix.service }} Service API to Docker Hub
+      - name: Build Dockerfile the ${{ matrix.service }} Service API
         run: |
-          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
-          docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
+          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG} -f ${{ env.DOCKERFILE_PATH }} .
+
+      - name: Push Dockerfile the ${{ matrix.service }} Service API
+        run: |
+          docker push guilhermelinosp/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
