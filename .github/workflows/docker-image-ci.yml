@@ -16,7 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set service_lowercase
         id: set_service_lowercase
         run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
 
@@ -26,9 +25,8 @@ jobs:
           dockerfile: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
           registry: ghcr.io
           registry-username: ${{ github.actor }}
-          image_name: ${{ github.repository }}-${{ steps.set_service_lowercase.outputs.service_lowercase }}
+          image_name: ${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api
           context: .
-          target_directory: .
           tags: dev
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
