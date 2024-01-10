@@ -35,4 +35,4 @@ jobs:
 
       - name: Push Dockerfile the ${{ matrix.service }} Service API
         run: |
-          docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
+          docker push docker.io/guilhermelinosp/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
