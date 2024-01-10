@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1.7.0 # Use the latest available version
+        uses: docker/setup-buildx-action@v1.7.0
 
       - name: Set service_lowercase
         id: set_service_lowercase
@@ -41,6 +41,6 @@ jobs:
           docker buildx inspect --bootstrap || exit 1
 
           echo "Building and pushing Docker image for ${{ matrix.service }} Service API..."
-          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE . || exit 1
+          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE . --push || exit 1
           docker push $DOCKER_IMAGE || exit 1
           echo "Docker image successfully built and pushed."
