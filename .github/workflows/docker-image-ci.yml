@@ -14,7 +14,7 @@ jobs:
         service: [Command, Platform]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set service_lowercase
         id: set_service_lowercase
