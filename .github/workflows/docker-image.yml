@@ -18,12 +18,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set service_lowercase
-        id: set_service_lowercase
-        run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
-
       - name: Build and Push Docker image for ${{ matrix.service }} Service API
         run: |
-          docker build -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
+          docker build -t ${{ matrix.service.toLowerCase() }}.service.api:$(date +%s) -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:$(date +%s)
+          docker push ${{ matrix.service.toLowerCase() }}.service.api:$(date +%s)
