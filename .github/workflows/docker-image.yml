@@ -42,5 +42,5 @@ jobs:
 
           echo "Building and pushing Docker image for ${{ matrix.service }} Service API..."
           docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE . || exit 1
-          docker push $DOCKER_IMAGE:dev || exit 1
+          docker push $DOCKER_IMAGE || exit 1
           echo "Docker image successfully built and pushed."
