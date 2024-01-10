@@ -30,7 +30,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_IMAGE: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
       run: |
-        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin your-registry
+        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin guilhermelinosp
         docker buildx create --use
         docker buildx inspect --bootstrap
         docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE .
