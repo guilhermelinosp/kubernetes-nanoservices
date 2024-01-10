@@ -13,10 +13,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@latest
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@latest # Use the latest available version
 
       - name: Set service_lowercase
         id: set_service_lowercase
@@ -33,7 +33,7 @@ jobs:
           DOCKER_IMAGE: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
         run: |
           echo "Logging into Docker registry..."
-          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin guilhermelinosp || exit 1
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin guilhermelinosp --dns 8.8.8.8 || exit 1
           echo "Docker login successful."
 
           echo "Creating and inspecting Docker Buildx builder..."
