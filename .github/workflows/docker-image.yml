@@ -9,6 +9,10 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        service: [Command, Platform]
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
