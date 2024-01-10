@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker images
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@v5.1.0
         with:
           context: .
           file: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
