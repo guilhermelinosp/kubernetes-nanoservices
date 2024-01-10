@@ -15,7 +15,6 @@ jobs:
         service: [Command, Platform]
 
     env:
-      DOCKER_IMAGE_TAG: dev
       DOCKERFILE_PATH: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
 
     steps:
@@ -31,8 +30,13 @@ jobs:
 
       - name: Build Dockerfile the ${{ matrix.service }} Service API
         run: |
-          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG} -f ${{ env.DOCKERFILE_PATH }} .
+          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev -f ${{ env.DOCKERFILE_PATH }} .
 
-      - name: Push Dockerfile the ${{ matrix.service }} Service API
-        run: |
-          docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ${{ env.DOCKERFILE_PATH }}
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
