@@ -24,6 +24,6 @@ jobs:
 
       - name: Build and Push Docker image for ${{ matrix.service }} Service API
         run: |
-          docker build --no-cache ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
+          docker build --no-cache -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:$(date +%s)
