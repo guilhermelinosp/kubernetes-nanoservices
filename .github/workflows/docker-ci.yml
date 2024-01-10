@@ -1,11 +1,11 @@
-name: Docker Image CI
+name: Docker CI
 
 on:
   push:
     branches: [main]
 
 jobs:
-  build_and_push:
+  build:
     runs-on: ubuntu-latest
 
     strategy:
