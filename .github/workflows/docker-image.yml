@@ -1,12 +1,10 @@
-name: Docker CI
-
 on:
   push:
     branches:
       - main
 
 jobs:
-  build-and-push:
+  push:
     runs-on: ubuntu-latest
 
     strategy:
@@ -14,24 +12,35 @@ jobs:
         service: [Command, Platform]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Set service_lowercase
-      id: set_service_lowercase
-      run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
+      - name: Set service_lowercase
+        id: set_service_lowercase
+        run: |
+          echo "Setting lowercase service name..."
+          service_lowercase=$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')
+          echo "::set-output name=service_lowercase::${service_lowercase}"
+          echo "Lowercase service name set to: ${service_lowercase}"
 
-    - name: Build and Push Dockerfile the ${{ matrix.service }} Service API
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_IMAGE: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
-      run: |
-        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin guilhermelinosp
-        docker buildx create --use
-        docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE .
-        docker push $DOCKER_IMAGE:dev
+      - name: Build and Push Dockerfile for ${{ matrix.service }} Service API
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_IMAGE: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
+        run: |
+          echo "Logging into Docker registry..."
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin guilhermelinosp || exit 1
+          echo "Docker login successful."
+
+          echo "Creating and inspecting Docker Buildx builder..."
+          docker buildx create --use || exit 1
+          docker buildx inspect --bootstrap || exit 1
+
+          echo "Building and pushing Docker image for ${{ matrix.service }} Service API..."
+          docker buildx build --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE . || exit 1
+          docker push $DOCKER_IMAGE:dev || exit 1
+          echo "Docker image successfully built and pushed."
