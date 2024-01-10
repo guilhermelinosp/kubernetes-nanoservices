@@ -3,8 +3,6 @@ name: Docker Image CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   build_and_push:
@@ -25,14 +23,21 @@ jobs:
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Set service_lowercase
         id: set_service_lowercase
         run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
 
       - name: Build Dockerfile the ${{ matrix.service }} Service API
         run: |
-          docker build --no-cache -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG} -f ${{ env.DOCKERFILE_PATH }} .
+          docker buildx create --use
+          docker buildx inspect --bootstrap
+          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG} -f ${{ env.DOCKERFILE_PATH }} .
 
       - name: Push Dockerfile the ${{ matrix.service }} Service API
         run: |
+          docker buildx use default
           docker image push docker.io/guilhermelinosp/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
