@@ -36,4 +36,4 @@ jobs:
           file: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
+            ghcr.io/${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api/dev
