@@ -1,4 +1,4 @@
-name: GitHub Packages CI
+name: Docker CI
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     strategy:
@@ -14,22 +14,23 @@ jobs:
         service: [Command, Platform]
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set service_lowercase
         id: set_service_lowercase
         run: echo "::set-output name=service_lowercase::$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')"
 
-      - name: Docker Login to GitHub Packages
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
-
-      - name: Build and push Docker images to GitHub Packages
-        uses: docker/build-push-action@v3.2.0
+      - name: Build and Push Docker Image
+        uses: GlueOps/github-actions-build-push-containers@v0.3.5
         with:
+          dockerfile: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
+          registry: ghcr.io
+          registry-username: ${{ github.actor }}
+          image_name: ${{ github.repository }}-${{ steps.set_service_lowercase.outputs.service_lowercase }}
           context: .
-          file: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
+          target_directory: .
+          tags: dev
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          dockerhub_username: ${{ secrets.DOCKER_USERNAME }}
+          dockerhub_password: ${{ secrets.DOCKER_PASSWORD }}
