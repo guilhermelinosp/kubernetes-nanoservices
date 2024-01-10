@@ -11,7 +11,9 @@ COPY ["Source/Command/Command.Service.API/Command.Service.API.csproj", "Source/C
 COPY ["Source/Command/Command.Service.Infrastructure/Command.Service.Infrastructure.csproj", "Source/Command/Command.Service.Infrastructure/"]
 COPY ["Source/Command/Command.Service.Application/Command.Service.Application.csproj", "Source/Command/Command.Service.Application/"]
 COPY ["Source/Command/Command.Service.Domain/Command.Service.Domain.csproj", "Source/Command/Command.Service.Domain/"]
+
 RUN dotnet restore "Source/Command/Command.Service.API/Command.Service.API.csproj"
+
 COPY . .
 WORKDIR "/src/Source/Command/Command.Service.API"
 RUN dotnet build "Command.Service.API.csproj" -c $BUILD_CONFIGURATION -o /app/build

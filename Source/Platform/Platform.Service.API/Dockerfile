@@ -11,6 +11,7 @@ COPY ["Source/Platform/Platform.Service.API/Platform.Service.API.csproj", "Sourc
 COPY ["Source/Platform/Platform.Service.Infrastructure/Platform.Service.Infrastructure.csproj", "Source/Platform/Platform.Service.Infrastructure/"]
 COPY ["Source/Platform/Platform.Service.Application/Platform.Service.Application.csproj", "Source/Platform/Platform.Service.Application/"]
 COPY ["Source/Platform/Platform.Service.Domain/Platform.Service.Domain.csproj", "Source/Platform/Platform.Service.Domain/"]
+
 RUN dotnet restore "Source/Platform/Platform.Service.API/Platform.Service.API.csproj"
 COPY . .
 WORKDIR "/src/Source/Platform/Platform.Service.API"
