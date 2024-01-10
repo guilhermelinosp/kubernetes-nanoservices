@@ -35,7 +35,8 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.2.0
         with:
-          context: ${{DOCKERFILE_PATH}} .
+          context: .
+          file: ${{DOCKERFILE_PATH}}
           push: true
           tags: |
             ${{ secrets.DOCKER_REGISTRY }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:${DOCKER_IMAGE_TAG}
