@@ -28,3 +28,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build and push Docker images to GitHub Packages
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: .
+          file: ./Source/${{ steps.set_service_lowercase.outputs.service_lowercase }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.Service.API/Dockerfile
+          push: true
+          tags: |
+            docker.pkg.github.com/${{ github.repository }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:dev
