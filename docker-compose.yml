@@ -1,0 +1,12 @@
+﻿services:
+  commad.service.api:
+    image: command.service.api
+    build:
+      context: .
+      dockerfile: Source/Command/Commad.Service.API/Dockerfile
+
+  platform.service.api:
+    image: platform.service.api
+    build:
+      context: .
+      dockerfile: Source/Platform/Platform.Service.API/Dockerfile

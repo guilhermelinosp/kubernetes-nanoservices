@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-deployment
+  labels:
+    app: platform-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform-deployment
+  template:
+    metadata:
+      name: platform-deployment
+      labels:
+        app: platform-deployment
+    spec:
+      containers:
+        - name: platform-deployment
+          image: guilhermelinosp/platform-service:latest
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      
