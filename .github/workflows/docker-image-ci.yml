@@ -8,14 +8,30 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
 
     strategy:
       matrix:
         service: [Command, Platform]
 
     steps:
-      - name: Checkout Code
+      - name: Check out the repo
         uses: actions/checkout@v4
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set Service Lowercase
         id: set_service_lowercase
@@ -23,29 +39,7 @@ jobs:
           service_lowercase=$(echo ${{ matrix.service }} | tr '[:upper:]' '[:lower:]')
           echo "::set-output name=service_lowercase::$service_lowercase"
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2.1.0
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and Push to Docker Hub
-        uses: docker/build-push-action@v3.2.0
-        with:
-          context: .
-          file: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
-          push: true
-          tags: |
-            docker.io/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest
-
-      - name: Login to GitHub Container
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and Push to GitHub Container
+      - name: Build and Push to Multiple Registries
         uses: docker/build-push-action@v3.2.0
         with:
           context: .
@@ -53,3 +47,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest
+            docker.io/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest
