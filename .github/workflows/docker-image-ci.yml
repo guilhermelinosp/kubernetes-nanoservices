@@ -38,14 +38,15 @@ jobs:
           tags: |
             ${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Build and Push Docker Image
-        uses: GlueOps/github-actions-build-push-containers@v0.3.5
-        with:
-          dockerfile: ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile
-          registry: ghcr.io
-          registry-username: ${{ github.actor }}
-          image_name: ${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api
-          context: .
-          target_directory: .
-          tags: latest
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo $DOCKER_PASSWORD | docker login docker.pkg.github.com -u $DOCKER_USERNAME --password-stdin
+          docker buildx create --use
+          docker buildx build --platform linux/amd64,linux/arm64 -t docker.pkg.github.com/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
+          docker push docker.pkg.github.com/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest
