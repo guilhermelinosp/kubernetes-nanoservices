@@ -45,7 +45,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          echo $DOCKER_PASSWORD | docker login ghcr.io -u $DOCKER_USERNAME --password-stdin
+          echo $DOCKER_PASSWORD | docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 -f ./Source/${{ matrix.service }}/${{ matrix.service }}.Service.API/Dockerfile .
           docker push ghcr.io/${{ github.actor }}/${{ steps.set_service_lowercase.outputs.service_lowercase }}.service.api:latest
