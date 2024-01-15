@@ -8,17 +8,17 @@ public class PlatformRepository(PlatformDbContext context) : IPlatformRepository
 {
 	public async Task<IEnumerable<Domain.Entities.Platform?>> FindAllPlatforms()
 	{
-		return await context.Platforms.AsNoTracking().ToListAsync();
+		return await context.Platforms!.AsNoTracking().ToListAsync();
 	}
 
 	public async Task<Domain.Entities.Platform?> FindPlatformById(Guid platformId)
 	{
-		return await context.Platforms.FirstOrDefaultAsync(platform => platform!.PlatformId == platformId);
+		return await context.Platforms!.FirstOrDefaultAsync(platform => platform!.PlatformId == platformId);
 	}
 
-	public async Task CreatePlatform(Domain.Entities.Platform? platform)
+	public async Task CreatePlatform(Domain.Entities.Platform platform)
 	{
-		await context.Platforms.AddAsync(platform);
+		await context.Platforms!.AddAsync(platform);
 
 		await SaveChanges();
 	}

@@ -4,5 +4,5 @@ public interface IPlatformRepository
 {
 	Task<IEnumerable<Entities.Platform?>> FindAllPlatforms();
 	Task<Entities.Platform?> FindPlatformById(Guid platformId);
-	Task CreatePlatform(Entities.Platform? platform);
+	Task CreatePlatform(Entities.Platform platform);
 }
