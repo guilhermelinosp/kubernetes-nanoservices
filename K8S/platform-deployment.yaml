@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: platform-deployment
-          image: guilhermelinosp/platform-service:latest
+          image: guilhermelinosp/platform.service.api:latest
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
       
