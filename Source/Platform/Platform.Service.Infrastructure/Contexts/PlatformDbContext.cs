@@ -9,12 +9,5 @@ public class PlatformDbContext(DbContextOptions<PlatformDbContext> options) : Db
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlatformDbContext).Assembly);
-		base.OnModelCreating(modelBuilder);
-	}
-
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		optionsBuilder.UseInMemoryDatabase("DB_Platform");
-		base.OnConfiguring(optionsBuilder);
 	}
 }
