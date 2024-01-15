@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
 namespace Platform.Service.Infrastructure.Contexts;
@@ -8,6 +9,7 @@ public class PlatformDbContext(DbContextOptions<PlatformDbContext> options) : Db
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlatformDbContext).Assembly);
+		modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(Domain.Entities.Platform))!);
+		base.OnModelCreating(modelBuilder);
 	}
 }

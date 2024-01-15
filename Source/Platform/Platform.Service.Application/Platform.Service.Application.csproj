@@ -7,17 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="12.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.38.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Platform.Service.Infrastructure\Platform.Service.Infrastructure.csproj" />
+        <ProjectReference Include="..\Platform.Service.Infrastructure\Platform.Service.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Platform.Service.Infrastructure\Platform.Service.Infrastructure.csproj" />
+        <ProjectReference Include="..\Platform.Service.Infrastructure\Platform.Service.Infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>
