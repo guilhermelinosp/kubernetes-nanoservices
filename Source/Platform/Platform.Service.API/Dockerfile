@@ -27,10 +27,8 @@ COPY --from=publish /app/publish .
 # Set metadata labels
 LABEL version="1.0" \
       maintainer="Guilherme Lino <guilhermelinosp@gmail.com>"
-
 # health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD curl --silent --fail http://localhost:80/health || exit 1
-
 # entrypoint
 ENTRYPOINT ["dotnet", "Command.Service.API.dll"]
 

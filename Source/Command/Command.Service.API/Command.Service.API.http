@@ -1,6 +1,0 @@
-@Commad.Service.API_HostAddress = http://localhost:5247
-
-GET {{Commad.Service.API_HostAddress}}/health
-Accept: application/json
-
-###
