@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: platform-deployment
-  labels:
-    app: platform-deployment
 spec:
   replicas: 1
   selector:
@@ -11,13 +9,12 @@ spec:
       app: platform-deployment
   template:
     metadata:
-      name: platform-deployment
       labels:
         app: platform-deployment
     spec:
       containers:
         - name: platform-deployment
           image: guilhermelinosp/platform.service.api:latest
-          imagePullPolicy: IfNotPresent
-      restartPolicy: Always
+          ports:
+            - containerPort: 8080
       

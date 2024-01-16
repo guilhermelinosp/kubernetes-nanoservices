@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: command-deployment
-  labels:
-    app: command-deployment
 spec:
   replicas: 1
   selector:
@@ -11,13 +9,11 @@ spec:
       app: command-deployment
   template:
     metadata:
-      name: command-deployment
       labels:
         app: command-deployment
     spec:
       containers:
         - name: command-deployment
-          image: guilhermelinosp/command-service:latest
-          imagePullPolicy: IfNotPresent
-      restartPolicy: Always
-      
+          image: guilhermelinosp/command.service.api:latest
+          ports:
+            - containerPort: 8081
