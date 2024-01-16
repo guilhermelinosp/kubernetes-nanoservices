@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Service.Application.Profiles;
@@ -22,7 +23,6 @@ public static class ApplicationInjection
 
 	private static void AddAutoMapper(this IServiceCollection services)
 	{
-		services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 		services.AddAutoMapper(typeof(PlatformProfile));
 	}
 }

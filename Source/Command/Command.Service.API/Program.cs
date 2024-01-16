@@ -1,6 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
+services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 services.AddCors(options =>
 {
