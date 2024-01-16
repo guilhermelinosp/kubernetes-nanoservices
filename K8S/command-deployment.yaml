@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: command-deployment
+  name: command.deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: command-deployment
+      app: command.service.api
   template:
     metadata:
       labels:
-        app: command-deployment
+        app: command.service.api
     spec:
       containers:
-        - name: command-deployment
+        - name: command.service.api
           image: guilhermelinosp/command.service.api:latest
           ports:
             - containerPort: 8081

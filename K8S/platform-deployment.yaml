@@ -6,15 +6,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: platform-deployment
+      app: platform-service-api
   template:
     metadata:
       labels:
-        app: platform-deployment
+        app: platform-service-api
     spec:
       containers:
-        - name: platform-deployment
+        - name: platform-service-api
           image: guilhermelinosp/platform.service.api:latest
-          ports:
-            - containerPort: 8080
-      
