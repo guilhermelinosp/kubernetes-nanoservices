@@ -15,5 +15,3 @@ spec:
       containers:
         - name: command.service.api
           image: guilhermelinosp/command.service.api:latest
-          ports:
-            - containerPort: 8081

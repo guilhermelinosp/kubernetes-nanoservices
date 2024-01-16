@@ -5,9 +5,9 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: platform-deployment
+    app: platform-service-api
   ports:
-    - name: http
+    - name: platform-service-api
       protocol: TCP
       port: 80
       targetPort: 80
