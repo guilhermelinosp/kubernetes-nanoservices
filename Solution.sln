@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8S", "K8S", "{1A51CF8E-563
 		K8S\command-cluster.yaml = K8S\command-cluster.yaml
 		K8S\platform-cluster.yaml = K8S\platform-cluster.yaml
 		K8S\nginx-ingress.yml.yaml = K8S\nginx-ingress.yml.yaml
+		K8S\local-pvc.yml = K8S\local-pvc.yml
+		K8S\mssql-deployment.yaml = K8S\mssql-deployment.yaml
+		K8S\mssql-cluster.yaml = K8S\mssql-cluster.yaml
+		K8S\mssql-loadbalancer.yaml = K8S\mssql-loadbalancer.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{ED5E8129-2504-4326-841D-2D28623247B7}"
