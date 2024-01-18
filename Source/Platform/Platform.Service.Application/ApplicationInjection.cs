@@ -13,16 +13,10 @@ public static class ApplicationInjection
 	{
 		services.AddInfrastructureInjection(configuration);
 		services.AddUseCases();
-		services.AddAutoMapper();
 	}
 
 	private static void AddUseCases(this IServiceCollection services)
 	{
 		services.AddScoped<IPlatformUseCase, PlatformUseCase>();
-	}
-
-	private static void AddAutoMapper(this IServiceCollection services)
-	{
-		services.AddAutoMapper(typeof(PlatformProfile));
 	}
 }

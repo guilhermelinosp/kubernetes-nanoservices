@@ -13,13 +13,10 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
         <PackageReference Include="RabbitMQ.Client" Version="6.8.1"/>
     </ItemGroup>
-
+    
     <ItemGroup>
         <ProjectReference Include="..\Platform.Service.Infrastructure\Platform.Service.Infrastructure.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Platform.Service.Infrastructure\Platform.Service.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Platform.Service.Domain\Platform.Service.Domain.csproj"/>
     </ItemGroup>
 
 </Project>
