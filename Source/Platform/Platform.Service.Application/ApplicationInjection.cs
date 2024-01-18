@@ -2,7 +2,6 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Platform.Service.Application.UseCases.Platform;
-using Platform.Service.Application.UseCases.Platforms;
 using Platform.Service.Domain.Profiles;
 using Platform.Service.Infrastructure;
 

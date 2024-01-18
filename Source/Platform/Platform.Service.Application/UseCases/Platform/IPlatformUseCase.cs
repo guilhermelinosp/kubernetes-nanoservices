@@ -1,7 +1,6 @@
-using Platform.Service.Domain.DTOs.Requests;
-using Platform.Service.Domain.DTOs.Responses;
+using Platform.Service.Domain.DTOs;
 
-namespace Platform.Service.Application.UseCases.Platforms;
+namespace Platform.Service.Application.UseCases.Platform;
 
 public interface IPlatformUseCase
 {

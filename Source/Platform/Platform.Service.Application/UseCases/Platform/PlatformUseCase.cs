@@ -1,7 +1,5 @@
 using AutoMapper;
-using Platform.Service.Application.UseCases.Platforms;
-using Platform.Service.Domain.DTOs.Requests;
-using Platform.Service.Domain.DTOs.Responses;
+using Platform.Service.Domain.DTOs;
 using Platform.Service.Domain.Repositories;
 
 namespace Platform.Service.Application.UseCases.Platform;

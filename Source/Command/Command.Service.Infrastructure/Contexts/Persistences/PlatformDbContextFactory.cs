@@ -1,7 +1,6 @@
-using Command.Service.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Platform.Service.Infrastructure.Contexts.Persistences;
+namespace Command.Service.Infrastructure.Contexts.Persistences;
 
 public static class PlatformDbContextFactory
 {

@@ -1,6 +1,5 @@
 using AutoMapper;
-using Platform.Service.Domain.DTOs.Requests;
-using Platform.Service.Domain.DTOs.Responses;
+using Platform.Service.Domain.DTOs;
 
 namespace Platform.Service.Domain.Profiles;
 

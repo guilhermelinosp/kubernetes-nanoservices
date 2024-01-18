@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using Platform.Service.Domain.DTOs.Responses;
+using Platform.Service.Domain.DTOs;
 using Platform.Service.Domain.Synchronizations.Http;
 
 namespace Platform.Service.Infrastructure.Synchronizations.Http;

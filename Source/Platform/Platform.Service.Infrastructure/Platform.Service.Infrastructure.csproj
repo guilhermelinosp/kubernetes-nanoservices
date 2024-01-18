@@ -7,18 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-        <PackageReference Include="Grpc.AspNetCore" Version="2.38.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1"/>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.38.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.1"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.8.1"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -26,7 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Synchronizations\Grpc\" />
+        <Folder Include="Synchronizations\Grpc\"/>
     </ItemGroup>
 
 </Project>

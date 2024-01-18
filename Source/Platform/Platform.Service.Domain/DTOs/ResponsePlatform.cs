@@ -1,4 +1,4 @@
-namespace Platform.Service.Domain.DTOs.Responses;
+namespace Platform.Service.Domain.DTOs;
 
 public class ResponsePlatform
 {

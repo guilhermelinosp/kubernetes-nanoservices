@@ -1,4 +1,4 @@
-namespace Platform.Service.Domain.DTOs.Requests;
+namespace Platform.Service.Domain.DTOs;
 
 public class RequestPlatform
 {

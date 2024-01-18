@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Platform.Service.Application.UseCases.Platforms;
-using Platform.Service.Domain.DTOs.Requests;
-using Platform.Service.Domain.DTOs.Responses;
+using Platform.Service.Application.UseCases.Platform;
+using Platform.Service.Domain.DTOs;
 
 namespace Platform.Service.API.Controllers;
 
