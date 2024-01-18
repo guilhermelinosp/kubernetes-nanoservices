@@ -23,4 +23,10 @@
         <ProjectReference Include="..\Platform.Service.Application\Platform.Service.Application.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>

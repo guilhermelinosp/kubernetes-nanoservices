@@ -23,4 +23,11 @@ RUN dotnet publish "Platform.Service.API.csproj" -c $BUILD_CONFIGURATION -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+LABEL version="1.0" \
+      maintainer="Guilherme Lino <guilhermelinosp@gmail.com>"
+
+# health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD curl --silent --fail http://localhost:80/health || exit 1
+
+# entrypoint
 ENTRYPOINT ["dotnet", "Platform.Service.API.dll"]

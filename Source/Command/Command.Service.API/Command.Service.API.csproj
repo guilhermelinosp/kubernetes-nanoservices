@@ -28,7 +28,10 @@
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Command.Service.Application\Command.Service.Application.csproj" />
     </ItemGroup>
 
 </Project>

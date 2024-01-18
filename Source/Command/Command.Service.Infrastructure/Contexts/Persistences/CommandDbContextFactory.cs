@@ -1,18 +1,19 @@
+using Command.Service.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Platform.Service.Infrastructure.Contexts.Persistences;
 
-public static class CommandDbContextFactory
+public static class PlatformDbContextFactory
 {
-	public static async Task<PlatformDbContext> Create()
+	public static async Task<CommandDbContext> Create()
 	{
 		try
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<PlatformDbContext>();
-			optionsBuilder.UseInMemoryDatabase("DB_Platform");
-			var platformDbContext = new PlatformDbContext(optionsBuilder.Options);
-			await platformDbContext.Database.EnsureCreatedAsync();
-			return platformDbContext;
+			var optionsBuilder = new DbContextOptionsBuilder<CommandDbContext>();
+			optionsBuilder.UseInMemoryDatabase("InMen");
+			var commandDbContext = new CommandDbContext(optionsBuilder.Options);
+			await commandDbContext.Database.EnsureCreatedAsync();
+			return commandDbContext;
 		}
 		catch (Exception ex)
 		{
@@ -21,15 +22,15 @@ public static class CommandDbContextFactory
 		}
 	}
 
-	public static async Task<PlatformDbContext> Destroy()
+	public static async Task<CommandDbContext> Destroy()
 	{
 		try
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<PlatformDbContext>();
-			optionsBuilder.UseInMemoryDatabase("DB_Platform");
-			var platformDbContext = new PlatformDbContext(optionsBuilder.Options);
-			await platformDbContext.Database.EnsureDeletedAsync();
-			return platformDbContext;
+			var optionsBuilder = new DbContextOptionsBuilder<CommandDbContext>();
+			optionsBuilder.UseInMemoryDatabase("InMen");
+			var commandDbContext = new CommandDbContext(optionsBuilder.Options);
+			await commandDbContext.Database.EnsureDeletedAsync();
+			return commandDbContext;
 		}
 		catch (Exception ex)
 		{

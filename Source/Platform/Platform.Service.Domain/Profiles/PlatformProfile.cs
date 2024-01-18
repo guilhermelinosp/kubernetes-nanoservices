@@ -2,7 +2,7 @@ using AutoMapper;
 using Platform.Service.Domain.DTOs.Requests;
 using Platform.Service.Domain.DTOs.Responses;
 
-namespace Platform.Service.Application.Profiles;
+namespace Platform.Service.Domain.Profiles;
 
 public class PlatformProfile : Profile
 {

@@ -25,4 +25,8 @@
         <ProjectReference Include="..\Platform.Service.Domain\Platform.Service.Domain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Synchronizations\Grpc\" />
+    </ItemGroup>
+
 </Project>

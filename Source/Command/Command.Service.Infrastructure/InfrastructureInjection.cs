@@ -1,11 +1,11 @@
+using Command.Service.Domain.Repositories;
+using Command.Service.Infrastructure.Contexts;
+using Command.Service.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Platform.Service.Domain.Repositories;
-using Platform.Service.Infrastructure.Contexts;
-using Platform.Service.Infrastructure.Repositories;
 
-namespace Platform.Service.Infrastructure;
+namespace Command.Service.Infrastructure;
 
 public static class InfrastructureInjection
 {
@@ -17,11 +17,11 @@ public static class InfrastructureInjection
 
 	private static void AddDbContext(this IServiceCollection services)
 	{
-		services.AddDbContext<PlatformDbContext>(options => { options.UseInMemoryDatabase("DB_Platform"); });
+		services.AddDbContext<CommandDbContext>(options => { options.UseInMemoryDatabase("InMen"); });
 	}
 
 	private static void AddRepositories(this IServiceCollection services)
 	{
-		services.AddScoped<IPlatformRepository, PlatformRepository>();
+		services.AddScoped<ICommandRepository, CommandRepository>();
 	}
 }

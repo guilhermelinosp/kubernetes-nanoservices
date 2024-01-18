@@ -17,7 +17,7 @@ public static class InfrastructureInjection
 
 	private static void AddDbContext(this IServiceCollection services)
 	{
-		services.AddDbContext<PlatformDbContext>(options => { options.UseInMemoryDatabase("DB_Platform"); });
+		services.AddDbContext<PlatformDbContext>(options => { options.UseInMemoryDatabase("InMen"); });
 	}
 
 	private static void AddRepositories(this IServiceCollection services)

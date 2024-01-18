@@ -7,6 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Reference Include="AutoMapper">
+          <HintPath>..\..\..\..\..\.nuget\packages\automapper\12.0.1\lib\netstandard2.1\AutoMapper.dll</HintPath>
+        </Reference>
         <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions">
             <HintPath>..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
         </Reference>

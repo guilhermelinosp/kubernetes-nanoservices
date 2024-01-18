@@ -9,7 +9,7 @@ public static class PlatformDbContextFactory
 		try
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<PlatformDbContext>();
-			optionsBuilder.UseInMemoryDatabase("DB_Platform");
+			optionsBuilder.UseInMemoryDatabase("InMen");
 			var platformDbContext = new PlatformDbContext(optionsBuilder.Options);
 			await platformDbContext.Database.EnsureCreatedAsync();
 			return platformDbContext;
@@ -26,7 +26,7 @@ public static class PlatformDbContextFactory
 		try
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<PlatformDbContext>();
-			optionsBuilder.UseInMemoryDatabase("DB_Platform");
+			optionsBuilder.UseInMemoryDatabase("InMen");
 			var platformDbContext = new PlatformDbContext(optionsBuilder.Options);
 			await platformDbContext.Database.EnsureDeletedAsync();
 			return platformDbContext;

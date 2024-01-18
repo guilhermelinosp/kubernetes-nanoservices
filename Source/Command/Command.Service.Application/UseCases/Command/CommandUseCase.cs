@@ -1,6 +1,5 @@
 namespace Command.Service.Application.UseCases.Command;
 
-public class CommandUseCase
+public class CommandUseCase : ICommandUseCase
 {
-	
 }

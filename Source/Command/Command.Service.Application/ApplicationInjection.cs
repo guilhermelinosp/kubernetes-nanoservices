@@ -1,11 +1,10 @@
-using System.Reflection;
+using Command.Service.Application.UseCases.Command;
+using Command.Service.Application.UseCases.Platform;
+using Command.Service.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Platform.Service.Application.Profiles;
-using Platform.Service.Application.UseCases.Platforms;
-using Platform.Service.Infrastructure;
 
-namespace Platform.Service.Application;
+namespace Command.Service.Application;
 
 public static class ApplicationInjection
 {
@@ -13,16 +12,11 @@ public static class ApplicationInjection
 	{
 		services.AddInfrastructureInjection(configuration);
 		services.AddUseCases();
-		services.AddAutoMapper();
 	}
 
 	private static void AddUseCases(this IServiceCollection services)
 	{
+		services.AddScoped<ICommandUseCase, CommandUseCase>();
 		services.AddScoped<IPlatformUseCase, PlatformUseCase>();
-	}
-
-	private static void AddAutoMapper(this IServiceCollection services)
-	{
-		services.AddAutoMapper(typeof(PlatformProfile));
 	}
 }
