@@ -15,3 +15,5 @@ spec:
       containers:
         - name: platform-service-api
           image: guilhermelinosp/platform.service.api:latest
+          ports:
+            - containerPort: 80
