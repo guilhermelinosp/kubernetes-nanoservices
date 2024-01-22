@@ -6,17 +6,17 @@ namespace Platform.Service.Application.UseCases.Platform;
 
 public class PlatformUseCase(IPlatformRepository repository, IMapper mapper) : IPlatformUseCase
 {
-	public async Task<IEnumerable<ResponsePlatform>?> GetAllPlatforms()
+	public async Task<IEnumerable<PlatformRead>?> GetAllPlatforms()
 	{
-		return mapper.Map<IEnumerable<ResponsePlatform>>(await repository.FindAllPlatforms());
+		return mapper.Map<IEnumerable<PlatformRead>>(await repository.FindAllPlatforms());
 	}
 
-	public async Task<ResponsePlatform?> GetPlatformById(Guid platformId)
+	public async Task<PlatformRead?> GetPlatformById(Guid platformId)
 	{
-		return mapper.Map<ResponsePlatform>(await repository.FindPlatformById(platformId));
+		return mapper.Map<PlatformRead>(await repository.FindPlatformById(platformId));
 	}
 
-	public async Task CreatePlatform(RequestPlatform platform)
+	public async Task CreatePlatform(PlatformCreate platform)
 	{
 		await repository.CreatePlatform(mapper.Map<Domain.Entities.Platform>(platform));
 	}

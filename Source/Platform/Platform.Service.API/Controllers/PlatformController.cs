@@ -9,21 +9,21 @@ namespace Platform.Service.API.Controllers;
 public class PlatformController(IPlatformUseCase platform) : Controller
 {
 	[HttpGet]
-	[ProducesResponseType<IEnumerable<ResponsePlatform>>(StatusCodes.Status200OK)]
+	[ProducesResponseType<IEnumerable<PlatformRead>>(StatusCodes.Status200OK)]
 	public async Task<IActionResult> GetAllPlatforms()
 	{
 		return Ok(await platform.GetAllPlatforms());
 	}
 
 	[HttpGet("{platformId}")]
-	[ProducesResponseType<ResponsePlatform>(StatusCodes.Status200OK)]
+	[ProducesResponseType<PlatformRead>(StatusCodes.Status200OK)]
 	public async Task<IActionResult> GetPlatformById([FromRoute] Guid platformId)
 	{
 		return Ok(await platform.GetPlatformById(platformId));
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> CreatePlatform([FromBody] RequestPlatform request)
+	public async Task<IActionResult> CreatePlatform([FromBody] PlatformCreate request)
 	{
 		await platform.CreatePlatform(request);
 		return Created();

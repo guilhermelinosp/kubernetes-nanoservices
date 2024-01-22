@@ -7,7 +7,7 @@ public class PlatformProfile : Profile
 {
 	public PlatformProfile()
 	{
-		CreateMap<Domain.Entities.Platform, ResponsePlatform>();
-		CreateMap<RequestPlatform, Domain.Entities.Platform>();
+		CreateMap<Domain.Entities.Platform, PlatformRead>();
+		CreateMap<PlatformCreate, Domain.Entities.Platform>();
 	}
 }

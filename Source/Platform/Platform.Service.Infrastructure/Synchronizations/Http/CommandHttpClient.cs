@@ -8,7 +8,7 @@ namespace Platform.Service.Infrastructure.Synchronizations.Http;
 
 public class CommandHttpClient(HttpClient httpClient, IConfiguration configuration) : ICommandHttpClient
 {
-	public async Task SendPlatformToCommand(ResponsePlatform response)
+	public async Task SendPlatformToCommand(PlatformRead response)
 	{
 		var httpContent = new StringContent(
 			JsonSerializer.Serialize(response),

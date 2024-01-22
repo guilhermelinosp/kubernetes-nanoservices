@@ -8,6 +8,11 @@
 
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1"/>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.38.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\platforms.proto" GrpcServices="Server"/>
     </ItemGroup>
 
 </Project>

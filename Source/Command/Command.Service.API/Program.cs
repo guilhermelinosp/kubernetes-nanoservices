@@ -1,4 +1,5 @@
 using Command.Service.Application;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -23,6 +24,11 @@ services.AddCors(options =>
 services.AddEndpointsApiExplorer();
 services.AddControllers();
 services.AddSwaggerGen();
+services.AddGrpc();
+services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Platform Service", Version = "v1" }); });
+
+Console.WriteLine($"--> CommandService Endpoint {configuration["CommandService"]}");
+
 
 var app = builder.Build();
 

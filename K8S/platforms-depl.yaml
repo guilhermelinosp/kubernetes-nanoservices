@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platforms-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform-service
+  template:
+    metadata:
+      labels:
+        app: platform-service
+    spec:
+      containers:
+        - name: platform-service
+          image: guilhermelinosp/platform.service.api:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: platforms-cluster
+spec:
+  type: ClusterIP
+  selector:
+    app: platform-service
+  ports:
+  - name: platform-service
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  - name: platform-grpc
+    protocol: TCP
+    port: 666
+    targetPort: 666

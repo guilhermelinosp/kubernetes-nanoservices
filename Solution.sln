@@ -7,17 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{A20171
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8S", "K8S", "{1A51CF8E-5637-4B29-AC3B-89C8F03EBFEC}"
 	ProjectSection(SolutionItems) = preProject
-		K8S\command-deployment.yaml = K8S\command-deployment.yaml
-		K8S\platform-deployment.yaml = K8S\platform-deployment.yaml
-		K8S\platform-nodeport.yaml = K8S\platform-nodeport.yaml
-		K8S\command-nodeport.yaml = K8S\command-nodeport.yaml
-		K8S\command-cluster.yaml = K8S\command-cluster.yaml
-		K8S\platform-cluster.yaml = K8S\platform-cluster.yaml
-		K8S\nginx-ingress.yml.yaml = K8S\nginx-ingress.yml.yaml
-		K8S\local-pvc.yml = K8S\local-pvc.yml
-		K8S\mssql-deployment.yaml = K8S\mssql-deployment.yaml
-		K8S\mssql-cluster.yaml = K8S\mssql-cluster.yaml
-		K8S\mssql-loadbalancer.yaml = K8S\mssql-loadbalancer.yaml
+		K8S\ingress-srv.yaml = K8S\ingress-srv.yaml
+		K8S\local-pvc.yaml = K8S\local-pvc.yaml
+		K8S\mssql-plat-depl.yaml = K8S\mssql-plat-depl.yaml
+		K8S\rabbitmq-depl.yaml = K8S\rabbitmq-depl.yaml
+		K8S\platforms-np-srv.yaml = K8S\platforms-np-srv.yaml
+		K8S\commands-depl.yaml = K8S\commands-depl.yaml
+		K8S\platforms-depl.yaml = K8S\platforms-depl.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{ED5E8129-2504-4326-841D-2D28623247B7}"

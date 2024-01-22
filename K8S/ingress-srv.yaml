@@ -1,28 +1,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress
+  name: ingress-srv
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
-  ingressClassName: nginx
   rules:
-    - host: "acme.com"
+    - host: acme.com
       http:
         paths:
-          - path: /api/v1/platform/.*
+          - path: /api/platforms
             pathType: Prefix
             backend:
               service:
-                name: platform-cluster
+                name: platforms-cluster
                 port:
                   number: 80
-          - path: /api/v1/c/platform/.*
+          - path: /api/c/platforms
             pathType: Prefix
             backend:
               service:
-                name: platform-cluster
+                name: commands-cluster
                 port:
                   number: 80
-                
+
+              

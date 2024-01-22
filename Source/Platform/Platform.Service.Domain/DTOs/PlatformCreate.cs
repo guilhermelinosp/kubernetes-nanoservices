@@ -1,9 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Platform.Service.Domain.DTOs;
 
-public class ResponsePlatform
+public class PlatformCreate
 {
-	public Guid PlatformId { get; set; }
-
 	public required string Name { get; set; }
 
 	public required string Publisher { get; set; }
